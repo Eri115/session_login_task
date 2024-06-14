@@ -12,26 +12,46 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      redirect_to tasks_path(@user.id) #保存できたら、タスク一覧画面表示する。
+      session[:user_id] = @user.id
+      redirect_to tasks_path  #保存できたら、タスク一覧画面表示する。
     else
       render :new #もし、保存できなかったらnewページに遷移させる。
     end
   end
 
   def edit
-    
+    @user = User.find(params[:id])
   end
-  
+
+
 
   def show
     @user = User.find(params[:id])
+  end
+
+  #ユーザーを見つける
+  #ユーザーを見つけたら、アップデートする
+  #もし見つからなかったら、編集ページにリダイレクトする。
+  def update
+    #binding.irb
+    @user = User.find(params[:id])
+
+    if @user.update(user_params)
+      redirect_to users_path, notice: t('.updata')
+    else
+      render :edit
+    end
+    # @user = user (params[:id])
+     
+    #if @user.upadata(params[:id])
+
   end
 
 
   private
 
   def user_params
-  params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)
 
   end
 end
