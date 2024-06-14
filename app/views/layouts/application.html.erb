@@ -11,20 +11,21 @@
 
   <body>
     <p id="notice"><%= notice %></p>
-    <% flash.each do |key, value| %>
-      <%= content_tag(:div, value, class: "#{key}") %>
-    <% end %>
-
+  
     <% if logged_in? %>
-      <%= link_to "タスク一覧", tasks_path, id: "tasks-index"%><br>
-      <%= link_to "タスクを登録する",new_task_path, id: "new-task"%><br>
-      <%= link_to "アカウント", user_path(current_user.id), id: "my-account"%><br>
-      <%= link_to "ログアウト", session_path(current_user.id), method: :delete, id: "sign-out" %>
+      <ul>
+      <li><%= link_to "タスク一覧", tasks_path, id: "tasks-index"%>
+      <li><%= link_to "タスクを登録する",new_task_path, id: "new-task"%>
+      <li><%= link_to "アカウント", user_path(current_user.id), id: "my-account"%>
+      <li><%= link_to "ログアウト", session_path(current_user.id), method: :delete, id: "sign-out" %>
+    </ul>
+
     <% else %>
-      <%= link_to "アカウント登録", new_user_path, id: "sign-up" %>
-      <%= link_to "ログイン", new_session_path, id: "sign-in"%>
+    <ul>
+      <li><%= link_to "アカウント登録", new_user_path, id: "sign-up" %>
+      <li><%= link_to "ログイン", new_session_path, id: "sign-in"%>
+    </ul>
     <% end %>
-    
     <%= yield %>
   </body>
 </html>

@@ -18,8 +18,8 @@ class SessionsController < ApplicationController
 
   def destroy
       session.delete(:user_id)
-      flash[:danger] = "ログアウトしました"
       redirect_to new_session_path
+      flash[:danger] = "ログアウトしました"
       end
   
 
