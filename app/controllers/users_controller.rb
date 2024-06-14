@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     if @user.save
       session[:user_id] = @user.id
       redirect_to tasks_path 
-      flash[:notice] = 'アカウント登録しました'
+      flash[:notice] = 'アカウントを登録しました'
        #保存できたら、タスク一覧画面表示する。
     else
       render :new #もし、保存できなかったらnewページに遷移させる。
@@ -41,13 +41,11 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 
     if @user.update(user_params)
-      redirect_to user_path, notice: t('.updata')
+      redirect_to user_path, notice: 'アカウントを更新しました'
     else
       render :edit
     end
-    # @user = user (params[:id])
-     
-    #if @user.upadata(params[:id])
+ 
   end
 
   def destroy
