@@ -1,16 +1,18 @@
 class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy ]
+  #skip_before_action :login_required, only: [:new, :create]
+  
 
   def index
-    @tasks = Task.all
+    @tasks = current_user.tasks
   end
 
   def new
-    @task = Task.new
+    @task = current_user.tasks.new
   end
 
   def create
-    @task = Task.new(task_params)
+    @task = current_user.tasks.new(task_params)
     if @task.save
       redirect_to tasks_path, notice: t('.created')
     else
@@ -19,9 +21,11 @@ class TasksController < ApplicationController
   end
 
   def show
+    @task = current_user.tasks.find(params[:id])
   end
 
   def edit
+    @task = current_user.tasks.find(params[:id])
   end
 
   def update
@@ -34,7 +38,7 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy
-    redirect_to tasks_path, notice: t('.destroyed')
+    redirect_to tasks_path
   end
 
   private
@@ -46,4 +50,5 @@ class TasksController < ApplicationController
     def task_params
       params.require(:task).permit(:title, :content)
     end
+    
 end

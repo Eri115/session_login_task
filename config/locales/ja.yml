@@ -6,11 +6,18 @@ ja:
       task:
         title: タイトル
         content: 内容
+      user:
+        name: 名前
+        email: メールアドレス
+        password: パスワード
+        password_confilmation: パスワード（確認）
   errors:
     format: "%{attribute}%{message}"
     messages:
       blank: を入力してください
   helpers:
+    label:
+     session:
     submit:
       create: 登録する
       update: 更新する
