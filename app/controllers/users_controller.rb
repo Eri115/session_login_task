@@ -53,6 +53,7 @@ class UsersController < ApplicationController
     #binding.irb
     @user.destroy
     redirect_to new_session_path
+    flash[:notice] = 'タスクを削除しました'
   end
 
 
