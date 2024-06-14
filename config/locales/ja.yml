@@ -10,7 +10,7 @@ ja:
         name: 名前
         email: メールアドレス
         password: パスワード
-        password_confilmation: パスワード（確認）
+        password_confirmation: パスワード（確認）
   errors:
     format: "%{attribute}%{message}"
     messages:
