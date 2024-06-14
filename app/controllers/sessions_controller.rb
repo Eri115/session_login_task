@@ -20,7 +20,7 @@ class SessionsController < ApplicationController
       session.delete(:user_id)
       redirect_to new_session_path
       flash[:danger] = "ログアウトしました"
-      end
+  end
   
 
 end
