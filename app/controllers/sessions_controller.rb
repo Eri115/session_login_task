@@ -9,9 +9,11 @@ class SessionsController < ApplicationController
     #binding.irb
     if user&.authenticate(params[:session][:password])
       session[:user_id] = user.id
+      flash[:notice] = 'ログインしました'
       redirect_to tasks_path
+
     else
-      flash.now[:danger] = 'ログインに失敗しました'
+      flash[:notice] = 'メールアドレスまたはパスワードに誤りがあります'
       render :new
     end
   end
@@ -19,8 +21,9 @@ class SessionsController < ApplicationController
 
   def destroy
       session.delete(:user_id)
+      flash[:notice] = 'ログアウトしました'
       redirect_to new_session_path
-      flash[:danger] = "ログアウトしました"
+      
   end
   
 
